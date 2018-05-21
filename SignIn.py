@@ -19,17 +19,12 @@ openid=''
 
 url='http://club.shimaogroup.com/m/Luckdraw/handler/SignHandler.ashx?type=suijinum'
 values ={ 'sfid':sfid,'openid':openid }
-#准备一下头
 headers = {
     'User-Agent': 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 }
-#将字典格式化成能用的形式
 data = urllib.parse.urlencode(values).encode('utf-8')
-#创建一个request,放入我们的地址、数据、头
 request = urllib.request.Request(url, data, headers)
-#访问
 html = urllib.request.urlopen(request).read().decode('utf-8')
-#利用json解析包解析返回的json数据 拿到翻译结果
 jsondata = json.loads(html)
 if jsondata['code']== 0:
     logger.info('签到成功'+'【'+html+'】')
